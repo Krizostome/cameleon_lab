@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CameleonLab — Agence digitale & innovation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
+    <script>
+      /* Anti-flash: apply theme before React renders */
+      (function() {
+        const stored = localStorage.getItem('cameleonlab-theme')
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const resolved = stored ? stored : (systemDark ? 'dark' : 'light')
+        document.documentElement.classList.add(resolved)
+      })()
+    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.tsx'])
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
