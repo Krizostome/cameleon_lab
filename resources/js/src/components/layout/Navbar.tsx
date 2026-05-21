@@ -1,9 +1,8 @@
-'use client'
-
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import gsap from 'gsap'
 import ThemeToggle from '../ui/ThemeToggle'
+import { usePathname } from '../../hooks/usePathname'
 
 /** Navigation link descriptor */
 interface NavLinkItem {
@@ -33,11 +32,11 @@ function SmartNavLink({
   onClick?: () => void
   className: string
 }) {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
 
   if (link.isRoute) {
     return (
-      <Link to={link.href} className={className} onClick={onClick}>
+      <Link href={link.href} className={className} onClick={onClick}>
         {link.label}
       </Link>
     )
@@ -52,7 +51,7 @@ function SmartNavLink({
   }
 
   return (
-    <Link to={`/${link.href}`} className={className} onClick={onClick}>
+    <Link href={`/${link.href}`} className={className} onClick={onClick}>
       {link.label}
     </Link>
   )
@@ -146,7 +145,7 @@ export default function Navbar() {
     <nav ref={navRef} className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${scrolled ? 'bg-[#F7FFF9]/80 dark:bg-[#060C0A]/80 backdrop-blur-xl border-[#00E87A]/20' : 'bg-transparent border-transparent'}`} aria-label="Navigation principale">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
         {/* Logo */}
-        <Link ref={logoRef} to="/" className="flex items-center gap-2 opacity-0" style={{ willChange: 'transform, opacity' }}>
+        <Link ref={logoRef} href="/" className="flex items-center gap-2 opacity-0" style={{ willChange: 'transform, opacity' }}>
           <span className="font-['Outfit'] text-xl font-bold tracking-tight text-[#071510] dark:text-[#F0FAF4] md:text-2xl">CameleonLab</span>
         </Link>
 
@@ -161,7 +160,7 @@ export default function Navbar() {
         <div className="hidden md:block"><ThemeToggle /></div>
 
         {/* CTA */}
-          <Link ref={ctaRef} to="/contact" className="relative hidden overflow-hidden rounded-full bg-[#00E87A] px-6 py-2.5 font-['Outfit'] text-sm font-extrabold text-[#071510] dark:text-[#F0FAF4] md:block opacity-0" style={{ willChange: 'transform, opacity' }}>
+          <Link ref={ctaRef} href="/contact" className="relative hidden overflow-hidden rounded-full bg-[#00E87A] px-6 py-2.5 font-['Outfit'] text-sm font-extrabold text-[#071510] dark:text-[#F0FAF4] md:block opacity-0" style={{ willChange: 'transform, opacity' }}>
           <span className="relative z-10">Démarrer un projet</span>
           <span ref={shimmerRef} className="pointer-events-none absolute inset-0 block" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)', width: '40%' }} />
         </Link>
@@ -184,7 +183,7 @@ export default function Navbar() {
             <span className="text-sm text-[#071510]/75 dark:text-[#F0FAF4]/75 font-['Satoshi']">Thème</span>
             <ThemeToggle />
           </div>
-          <Link to="/contact" className="mt-2 w-full rounded-full bg-[#00E87A] px-6 py-3 font-['Outfit'] text-sm font-extrabold text-[#071510] dark:text-[#F0FAF4] text-center block" onClick={() => setMobileOpen(false)}>
+          <Link href="/contact" className="mt-2 w-full rounded-full bg-[#00E87A] px-6 py-3 font-['Outfit'] text-sm font-extrabold text-[#071510] dark:text-[#F0FAF4] text-center block" onClick={() => setMobileOpen(false)}>
             Démarrer un projet
           </Link>
         </div>

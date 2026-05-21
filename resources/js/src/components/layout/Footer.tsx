@@ -1,8 +1,7 @@
-"use client"
-
 import React, { useState } from "react"
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { motion, Variants, useReducedMotion } from "framer-motion"
+import { usePathname } from '../../hooks/usePathname'
 
 /* ═══════════════════════════════════════════════════════════════════ */
 /*  Inline brand icons (lucide-react v1 dropped these)               */
@@ -213,7 +212,7 @@ const columnVariants: Variants = {
 /* ═══════════════════════════════════════════════════════════════════ */
 
 function FooterLinkItem({ href, children }: { href: string; children: React.ReactNode }) {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const isExternal = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')
   const isRoute = href.startsWith('/')
   const isAnchor = href.startsWith('#')
@@ -243,7 +242,7 @@ function FooterLinkItem({ href, children }: { href: string; children: React.Reac
 
   if (isRoute) {
     return (
-      <Link to={href} className={className}>
+      <Link href={href} className={className}>
         {inner}
       </Link>
     )
@@ -259,7 +258,7 @@ function FooterLinkItem({ href, children }: { href: string; children: React.Reac
   }
 
   return (
-    <Link to={`/${href}`} className={className}>
+    <Link href={`/${href}`} className={className}>
       {inner}
     </Link>
   )

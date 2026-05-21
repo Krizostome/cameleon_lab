@@ -1,7 +1,5 @@
-"use client"
-
 import React, { useEffect, useRef, useState, useCallback } from "react"
-import { useParams, useNavigate, Link } from "react-router-dom"
+import { Link, router } from '@inertiajs/react'
 import { motion } from "framer-motion"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -316,7 +314,7 @@ function ArticleSidebar({
             {similar.map((post) => (
               <Link
                 key={post.id}
-                to={`/blog/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="group flex gap-3"
               >
                 <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg">
@@ -349,7 +347,7 @@ function ArticleSidebar({
         </h3>
         <div className="flex flex-col gap-4">
           {popular.map((post, i) => (
-            <Link key={post.id} to={`/blog/${post.slug}`} className="group flex gap-3">
+            <Link key={post.id} href={`/blog/${post.slug}`} className="group flex gap-3">
               <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-[#00E87A]/10 font-['Satoshi'] text-[10px] font-bold text-[#00E87A]">
                 {i + 1}
               </span>
@@ -400,7 +398,7 @@ function ArticleNotFound({ onBack }: { onBack: () => void }) {
         L'article que vous recherchez n'existe pas ou a été déplacé.
       </p>
         <Link
-        to="/blog"
+        href="/blog"
         className="inline-flex items-center gap-2 rounded-full bg-[#00E87A] px-6 py-3 font-['Satoshi'] text-sm font-extrabold text-[#071510] transition-all hover:shadow-[0_0_24px_rgba(0,232,122,0.3)]"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -414,10 +412,9 @@ function ArticleNotFound({ onBack }: { onBack: () => void }) {
 /*  Main ArticleDetail Page                                           */
 /* ═══════════════════════════════════════════════════════════════════ */
 
-export default function ArticleDetail() {
-  const { slug } = useParams<{ slug: string }>()
-  const navigate = useNavigate()
-  const post = BLOG_POSTS.find((p) => p.slug === slug)
+export default function ArticleDetail({ slug }: { slug?: string }) {
+  const resolvedSlug = slug || window.location.pathname.split('/').pop() || ''
+  const post = BLOG_POSTS.find((p) => p.slug === resolvedSlug)
 
   const heroRef = useRef<HTMLDivElement>(null)
   const heroImageRef = useRef<HTMLImageElement>(null)
@@ -492,11 +489,11 @@ export default function ArticleDetail() {
     })
 
     return () => ctx.revert()
-  }, [post, slug])
+  }, [post, resolvedSlug])
 
   const handleBack = useCallback(() => {
-    navigate("/blog")
-  }, [navigate])
+    router.visit("/blog")
+  }, [])
 
   if (!post) {
     return <ArticleNotFound onBack={handleBack} />
@@ -513,7 +510,7 @@ export default function ArticleDetail() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
           
           <Link
-            to="/"
+            href="/"
             className="font-['Satoshi'] text-lg font-bold tracking-tight text-[#071510] dark:text-[#F0FAF4] md:text-xl"
           >
             CameleonLab
@@ -716,7 +713,7 @@ function NextArticle({ currentPost, allPosts }: { currentPost: BlogPost; allPost
         <span className="mb-4 block font-['Satoshi'] text-xs font-medium uppercase tracking-[0.2em] text-[#00E87A]">
           Article suivant
         </span>
-        <Link to={`/blog/${nextPost.slug}`} className="group block">
+        <Link href={`/blog/${nextPost.slug}`} className="group block">
           <h3 className="mb-4 font-['Outfit'] text-2xl font-bold leading-tight text-[#071510] dark:text-[#F0FAF4] transition-colors group-hover:text-[#00E87A] md:text-3xl">
             {nextPost.title}
           </h3>

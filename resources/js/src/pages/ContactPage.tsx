@@ -4,10 +4,8 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Sparkles, ArrowLeft } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import ContactWizard from '../components/wizard/ContactWizard'
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
 
 export default function ContactPage() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -60,13 +58,10 @@ export default function ContactPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#F7FFF9] dark:bg-[#060C0A]">
-      <Navbar />
-
-      <section
-        ref={sectionRef}
-        className="relative min-h-screen pt-28 md:pt-32 pb-20 md:pb-28 overflow-hidden"
-      >
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen pt-28 md:pt-32 pb-20 md:pb-28 overflow-hidden"
+    >
         {/* Background glow */}
         <div
           className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full pointer-events-none opacity-60"
@@ -133,8 +128,5 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
   )
 }

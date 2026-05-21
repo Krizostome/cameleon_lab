@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { Clock, ArrowRight } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
@@ -99,7 +99,7 @@ export default function FeaturedArticle({ post }: FeaturedArticleProps) {
             </div>
 
             {/* CTA */}
-            <Link to={`/blog/${post.slug}`}>
+            <Link href={`/blog/${post.slug}`}>
               <motion.span
                 className="group/btn inline-flex items-center gap-2 rounded-full bg-[#00E87A] px-6 py-3 font-['Satoshi'] text-sm font-extrabold text-[#071510] transition-all hover:shadow-[0_0_24px_rgba(0,232,122,0.3)]"
                 whileHover={{ scale: 1.02 }}

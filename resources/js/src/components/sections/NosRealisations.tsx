@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { PROJECTS, type Project } from '../../data/projects'
 
@@ -278,14 +278,14 @@ function FeaturedProject({ project }: { project: Project }) {
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              to={`/portfolio/${project.slug}`}
+              href={`/portfolio/${project.slug}`}
               className="group inline-flex items-center gap-2 rounded-full bg-[#00E87A] px-6 py-3 font-['Satoshi'] text-sm font-extrabold text-[#071510] transition-all hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(0,232,122,0.35)] active:scale-[0.98]"
             >
               Voir le projet
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
             <Link
-              to={`/portfolio/${project.slug}`}
+              href={`/portfolio/${project.slug}`}
               className="inline-flex items-center gap-2 rounded-full border border-[#071510]/10 px-6 py-3 font-['Satoshi'] text-sm font-bold text-[#071510] transition-colors hover:bg-[#071510]/5 dark:border-[#F0FAF4]/10 dark:text-[#F0FAF4] dark:hover:bg-[#F0FAF4]/5"
             >
               Étude de cas
@@ -412,7 +412,7 @@ function BentoCard({
     >
       <Link
         ref={cardRef}
-        to={`/portfolio/${project.slug}`}
+        href={`/portfolio/${project.slug}`}
         className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#00E87A]/10 bg-[var(--bg-card)] transition-all duration-500 hover:border-[#00E87A]/30 hover:shadow-[0_8px_40px_rgba(0,232,122,0.12)]"
         style={{
           rotateX,

@@ -1,19 +1,17 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from '@inertiajs/react'
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ArrowLeft, ArrowRight, ExternalLink, Target, Lightbulb, Cpu, BarChart3, Users, Calendar, FolderOpen } from "lucide-react"
-import Navbar from "../components/layout/Navbar"
-import Footer from "../components/layout/Footer"
 import { PROJECTS } from "../data/projects"
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function ProjectDetailPage() {
-  const { slug } = useParams<{ slug: string }>()
-  const project = PROJECTS.find((p) => p.slug === slug)
+export default function ProjectDetailPage({ slug }: { slug?: string }) {
+  const resolvedSlug = slug || window.location.pathname.split('/').pop() || ''
+  const project = PROJECTS.find((p) => p.slug === resolvedSlug)
   const allProjects = PROJECTS
   const currentIndex = allProjects.findIndex((p) => p.slug === slug)
   const prevProject = allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length]
@@ -24,7 +22,7 @@ export default function ProjectDetailPage() {
   const imageRef = useRef<HTMLDivElement>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
 
-  useEffect(() => { window.scrollTo(0, 0) }, [slug])
+  useEffect(() => { window.scrollTo(0, 0) }, [resolvedSlug])
 
   useEffect(() => {
     if (!project || !containerRef.current) return
@@ -47,17 +45,13 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <>
-        <Navbar />
-        <main className="flex min-h-screen flex-col items-center justify-center bg-[#F7FFF9] pt-24 dark:bg-[#060C0A]">
-          <h1 className="font-['Outfit'] text-4xl font-bold text-[#071510] dark:text-[#F0FAF4]">Projet introuvable</h1>
-          <p className="mt-4 font-['Satoshi'] text-[#374151]">Ce projet n'existe pas.</p>
-          <Link to="/portfolio" className="mt-8 inline-flex items-center gap-2 text-[#00E87A] hover:underline">
-            <ArrowLeft className="h-4 w-4" /> Voir tous les projets
-          </Link>
-        </main>
-        <Footer />
-      </>
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#F7FFF9] pt-24 dark:bg-[#060C0A]">
+        <h1 className="font-['Outfit'] text-4xl font-bold text-[#071510] dark:text-[#F0FAF4]">Projet introuvable</h1>
+        <p className="mt-4 font-['Satoshi'] text-[#374151]">Ce projet n'existe pas.</p>
+        <Link href="/portfolio" className="mt-8 inline-flex items-center gap-2 text-[#00E87A] hover:underline">
+          <ArrowLeft className="h-4 w-4" /> Voir tous les projets
+        </Link>
+      </main>
     )
   }
 
@@ -70,9 +64,7 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <>
-      <Navbar />
-      <main className="relative min-h-screen bg-[#F7FFF9] dark:bg-[#060C0A]">
+    <main className="relative min-h-screen bg-[#F7FFF9] dark:bg-[#060C0A]">
         <div ref={containerRef}>
           {/* ═══════════════════════════════════════════ */}
           {/*  HERO PROJET                               */}
@@ -101,7 +93,7 @@ export default function ProjectDetailPage() {
             <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
               {/* Retour */}
               <Link
-                to="/portfolio"
+                href="/portfolio"
                 className="mb-8 inline-flex items-center gap-2 font-['Satoshi'] text-sm font-medium uppercase tracking-wider text-[#00E87A] transition-opacity hover:opacity-70"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -249,7 +241,7 @@ export default function ProjectDetailPage() {
             {/* CTA Interne + Externe */}
             <div className="detail-section flex flex-wrap items-center gap-4 pt-8">
               <Link
-                to="/contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-[#00E87A] px-6 py-3 font-['Satoshi'] text-sm font-semibold uppercase tracking-wider text-[#071510] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,232,122,0.4)]"
               >
                 Démarrer un projet <ArrowRight className="h-4 w-4" />
@@ -273,7 +265,7 @@ export default function ProjectDetailPage() {
           <nav className="border-t border-[#00E87A]/10 bg-[#F7FFF9] py-12 dark:bg-[#060C0A]">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 md:px-10">
               <Link
-                to={`/portfolio/${prevProject.slug}`}
+                href={`/portfolio/${prevProject.slug}`}
                 className="group flex flex-col items-start gap-1 font-['Satoshi'] text-sm font-semibold uppercase tracking-wider text-[#00E87A] transition-opacity hover:opacity-70"
               >
                 <span className="flex items-center gap-2 text-[10px] text-[#374151] dark:text-[#9CA3AF]">
@@ -285,7 +277,7 @@ export default function ProjectDetailPage() {
               </Link>
 
               <Link
-                to={`/portfolio/${nextProject.slug}`}
+                href={`/portfolio/${nextProject.slug}`}
                 className="group flex flex-col items-end gap-1 font-['Satoshi'] text-sm font-semibold uppercase tracking-wider text-[#00E87A] transition-opacity hover:opacity-70"
               >
                 <span className="flex items-center gap-2 text-[10px] text-[#374151] dark:text-[#9CA3AF]">
@@ -299,7 +291,5 @@ export default function ProjectDetailPage() {
           </nav>
         </div>
       </main>
-      <Footer />
-    </>
   )
 }

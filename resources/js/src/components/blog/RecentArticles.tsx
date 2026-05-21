@@ -1,6 +1,6 @@
 'use client'
 
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import ArticleMeta from './ArticleMeta'
@@ -24,7 +24,7 @@ function ArticleCard({ post, index }: { post: BlogPost; index: number }) {
       }}
     >
       <Link
-        to={`/blog/${post.slug}`}
+        href={`/blog/${post.slug}`}
         className="group relative flex flex-col overflow-hidden rounded-2xl bg-[#F0FAF4]/50 dark:bg-[#071510]/50 border border-[#00E87A]/8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-12px_rgba(0,232,122,0.12)] hover:border-[#00E87A]/25"
       >
       {/* Image */}

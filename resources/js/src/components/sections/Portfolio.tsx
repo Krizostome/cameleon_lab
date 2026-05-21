@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 interface Project {
@@ -222,7 +222,7 @@ export default function Portfolio() {
             </h2>
           </div>
           <Link
-            to="/portfolio"
+            href="/portfolio"
             className="group inline-flex items-center gap-2 font-['Satoshi'] text-sm font-medium text-[#071510]/80 dark:text-[#F0FAF4]/80 transition-colors hover:text-[#00E87A]"
           >
             Voir tout

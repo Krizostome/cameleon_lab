@@ -1,16 +1,15 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CameleonLab — Agence digitale & innovation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
     <script>
-      /* Anti-flash: apply theme before React renders */
       (function() {
         const stored = localStorage.getItem('cameleonlab-theme')
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -18,9 +17,11 @@
         document.documentElement.classList.add(resolved)
       })()
     </script>
+    @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.tsx'])
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    @inertiaHead
+</head>
+<body>
+    @inertia
+</body>
 </html>

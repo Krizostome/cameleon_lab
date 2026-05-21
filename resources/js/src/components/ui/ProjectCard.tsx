@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link } from '@inertiajs/react'
 import gsap from "gsap"
 import type { Project } from "../../data/projects"
 
@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index, className = "" }: ProjectC
   return (
     <Link
       ref={cardRef}
-      to={`/portfolio/${project.slug}`}
+      href={`/portfolio/${project.slug}`}
       className={`project-card group relative block overflow-hidden rounded-2xl ${className}`}
       style={{ cursor: isTouchDevice ? "pointer" : "none", transformStyle: "preserve-3d", willChange: "transform" }}
       aria-label={`Voir le projet ${project.title}`}

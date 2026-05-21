@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { ArrowRight, TrendingUp, Tag, Mail, MapPin } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
@@ -27,7 +27,7 @@ function ArticleRow({ post, index }: { post: BlogPost; index: number }) {
       }}
     >
       <Link
-        to={`/blog/${post.slug}`}
+        href={`/blog/${post.slug}`}
         className="group relative flex gap-5 border-b border-[#00E87A]/8 py-6 transition-all duration-300 hover:pl-2 md:gap-6 md:py-8"
       >
       {/* Thumbnail */}
@@ -108,7 +108,7 @@ function Sidebar({ categories, tags, popularPosts }: { categories: Category[]; t
         </h3>
         <div className="flex flex-col gap-4">
           {popularPosts.map((post, i) => (
-            <Link key={post.id} to={`/blog/${post.slug}`} className="group flex gap-3">
+            <Link key={post.id} href={`/blog/${post.slug}`} className="group flex gap-3">
               <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-[#00E87A]/10 font-['Satoshi'] text-[10px] font-bold text-[#00E87A]">
                 {i + 1}
               </span>

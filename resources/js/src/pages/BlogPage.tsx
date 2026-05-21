@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
 import BlogHero from '../components/blog/BlogHero'
 import FeaturedArticle from '../components/blog/FeaturedArticle'
 import RecentArticles from '../components/blog/RecentArticles'
@@ -23,7 +21,6 @@ export default function BlogPage() {
   return (
     <>
       <CursorGlow />
-      <Navbar />
       <main className="min-h-screen bg-[#F7FFF9] dark:bg-[#060C0A]">
         <BlogHero />
         <FeaturedArticle post={featuredPost} />
@@ -31,7 +28,6 @@ export default function BlogPage() {
         <BlogNewsletter />
         <AllArticles posts={allPosts} categories={CATEGORIES} tags={TAGS} />
       </main>
-      <Footer />
     </>
   )
 }

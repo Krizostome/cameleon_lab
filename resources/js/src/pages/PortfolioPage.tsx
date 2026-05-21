@@ -3,8 +3,6 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import Navbar from "../components/layout/Navbar"
-import Footer from "../components/layout/Footer"
 import PortfolioGrid from "../components/sections/PortfolioGrid"
 import { PROJECTS } from "../data/projects"
 
@@ -63,12 +61,10 @@ export default function PortfolioPage() {
   }, [])
 
   return (
-    <>
-      <Navbar />
-      <main>
-        {/* ═══════════════════════════════════════════ */}
-        {/*  HERO PORTFOLIO                            */}
-        {/* ═══════════════════════════════════════════ */}
+    <main>
+      {/* ═══════════════════════════════════════════ */}
+      {/*  HERO PORTFOLIO                            */}
+      {/* ═══════════════════════════════════════════ */}
         <section
           ref={sectionRef}
           className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-[#F7FFF9] pt-24 pb-16 dark:bg-[#060C0A] md:min-h-[85vh]"
@@ -214,7 +210,5 @@ export default function PortfolioPage() {
 
         <PortfolioGrid projects={PROJECTS} />
       </main>
-      <Footer />
-    </>
   )
 }
